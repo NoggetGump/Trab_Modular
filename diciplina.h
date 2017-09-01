@@ -24,7 +24,7 @@
 *     Ao iniciar a execução do programa não existe diciplinas.
 *     Uma disciplina deverá ter um critério de avaliação, que será um código que se *refere a uma forma de calcular a média final para poder determinar se um aluno *está aprovado ou não.
 ***************************************************************************/
-typedef struct diciplina Diciplina;
+typedef struct diciplina* Diciplina;
 
 /***********************************************************************
 *
@@ -54,4 +54,4 @@ typedef struct diciplina Diciplina;
 *    Recebe uma diciplina e retorna o seu nome.
 *
 ***********************************************************************/
-DIC_tpCondRet DIC_get_nome(Diciplina* d, char* nome);
+DIC_tpCondRet DIC_get_nome(Diciplina d, char* nome);
