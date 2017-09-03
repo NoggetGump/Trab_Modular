@@ -17,10 +17,18 @@
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data      Observações
 *       0.01   mrol   30/08/2017  Início do desenvolvimento
-*       0.02 ngtgmp   01/092017   
+*       0.02 ngtgmp   01/09/2017   
 ***************************************************************************/
 
 #include "disciplina.h"
+
+struct disciplina{
+	char* nome;
+	char* codigo;
+	int credito;
+	char* bibliografia;
+	char* ementa;
+};
 
 /***************************************************************************
 *
@@ -28,7 +36,7 @@
 *  ****/
 char *DIS_le_Bib(void){
   char *n = (char *)malloc(300*sizeof(char));
-  if(*n == NULL)
+  if(n == NULL)
   {
     printf("Espaço em memória insuficiente\n");
     free(n);
@@ -118,21 +126,76 @@ DIS_tpCondRet DIS_get_nome(Disciplina d, char* nome)
   }
   return DIS_CondRetErroEstrutura;
 }/* Fim função: DIS obter nome */
-
+/***************************************************************************
+* ngtgmp
+*
+*  Função: DIS obter ementa
+*  ****/
+DIS_tpCondRet DIS_get_ementa(Disciplina d, char* ementa)
+{
+  if(d->ementa)
+  {
+	ementa = (char*) malloc(300*sizeof(char));
+	if(ementa == NULL)
+		exit(1);
+	strcpy(ementa, d->ementa);
+	return DIC_CondRetOK;
+  }
+  return DIS_CondRetErroEstrutura;
+}
+/***************************************************************************
+* ngtgmp
+*
+*  Função: DIS ler ementa
+*  ****/
+char *DIS_le_ementa(){
+  char *ementa = (char *)malloc(300*sizeof(char));
+  if(ementa == NULL)  { exit(1);  }
+  printf("Digite a ementa");
+  scanf(" %300s", ementa);
+  return ementa;
+} /* Fim função: DIS ler bibliografia */
+/***************************************************************************
+* ngtgmp
+*
+*  Função: DIS ler nome
+*  ****/
+char* DIS_le_nome(Disciplina d)
+{
+  char* name;
+  name = (char*) malloc(26*sizeof(char));
+  if(ementa == NULL)  { exit(1);  }
+  scanf("%25s", name);
+  return name;
+}
 /*************************************************************************
 *  ngtgmp
 *
-*  Função: DIS gera uma disciplina por input do teclado
+*  Função: Separa espaço para uma Disciplina (malloc)
 *  ****/
-DIS_tpCondRet geraDIS1(Disciplina* d)
+DIS_tpCondret criaDisciplina(Disciplina* d)
 {
-  d = (Disciplina*) malloc (sizeof(Disciplina));
-	if(*d == NULL)
+  d = (Disciplina *) malloc(sizeof(Disciplina));
+  if(d == NULL)
 		return DIS_CondRetFaltouMemoria;
+  else return DIS_CondRetOK;
+}
+/*************************************************************************
+*  ngtgmp
+*
+*  Função: DIS cria espaço para uma disciplina por input do teclado
+*  ****/
+DIS_tpCondRet geraDIS1(Disciplina d)
+{
+  int i; 
+  i = criaDisciplina(&d);
+  if(i == DIS_CondRetFaltouMemoria)
+	return DIS_CondRetFaltouMemoria;
   d->nome = DIS_le_nome();
   d->codigo = DIS_le_codigo();
-  d->creditos = le_creditos();
-  d->bibliografia = le_bibliografia();
+  d->creditos = DIS_le_creditos();
+  d->bibliografia = DIS_le_Bib();
+  d->ementa = DIS_le_ementa();
   return DIS_CondRetOK;
 }
 
@@ -141,16 +204,16 @@ DIS_tpCondRet geraDIS1(Disciplina* d)
 *
 *  Função: DIS gera uma disciplina recebendo parâmetros externos
 *  ****/
-DIS_tpCondRet geraDIS2(Disciplina* d, char* nome, char* codigo, int creditos, char* bibliografia)
+DIS_tpCondRet geraDIS2(Disciplina d, char* nome, char* codigo, int creditos, char* bibliografia, char* ementa)
 {
-  d = (Disciplina*) malloc (sizeof(Disciplina));
-	if(*d == NULL)
-		return DIS_CondRetFaltouMemoria;
-  strcpy(d->nome, codigo);
+  int i; 
+  i = criaDisciplina(&d);
+  if(i == DIS_CondRetFaltouMemoria)
+	return DIS_CondRetFaltouMemoria;
+  strcpy(d->nome, nome);
   strcpy(d->codigo, codigo);
   d->creditos = creditos;
-  d->bibliografia = le_bibliografia();
+  strcpy(d->bibliografia, bibliografia);
+  strcpy(d->ementa, ementa);
   return DIS_CondRetOK;
 }
-
-
