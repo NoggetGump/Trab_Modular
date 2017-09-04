@@ -102,15 +102,6 @@ DIS_tpCondRet DIS_gera_param(char* nome, char* codigo, int creditos, char* bibli
 DIS_tpCondRet DIS_exibe(void);
 /***********************************************************************
 *
-*  $FC Função: DIS cria disciplina
-*
-*  $ED Descrição da função
-*    DIS cria a struct disciplina
-*
-***********************************************************************/
-DIS_tpCondRet DIS_cria_Disciplina(void);
-/***********************************************************************
-*
 *  $FC Função: DIS le codigo
 *
 *  $ED Descrição da função
@@ -145,3 +136,11 @@ char* DIS_le_nome(void);
 *
 ***********************************************************************/
 char *DIS_le_ementa(void);
+/***********************************************************************
+*
+*  $FC Função: DIS obter bibliografia
+*
+*  $ED Descrição da função
+*    Retorna a bibliografia
+*
+***********************************************************************/
