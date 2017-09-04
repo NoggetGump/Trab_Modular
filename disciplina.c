@@ -127,17 +127,6 @@ char *DIS_le_Bib(void){
 } /* Fim função: DIS ler bibliografia */
 /***************************************************************************
 *
-*  Função: DIS retorna string size
-*  ****/
-int lenghtS(char* string)
-{
-  int lenght = 0;
-  while(string[lenght] != '\0')
-	  lenght ++;
-  return lenght;
-}
-/***************************************************************************
-*
 *  Função: DIS ler codigo
 *  ****/
 char* DIS_le_codigo(void) 				/* Codigo da disciplina no padrão inf0000 */
@@ -154,7 +143,7 @@ char* DIS_le_codigo(void) 				/* Codigo da disciplina no padrão inf0000 */
   printf("\n\nDigite o código numerico da disciplina:\n");
   scanf("%4s", cod2); 				/* O usuario digitará apenas a parte numerica do codigo (4 Numerais no caso)*/
   /*ngtgmp - não deixa o usuário escrever algo que não sejam numerais, ou menos de 4 numerais*/
-  while(cod2[0]<48 || cod2[0]>57 ||cod2[1]<48 || cod2[1]>57 || cod2[2]<48 || cod2[2]>57 || cod2[3]<48 || cod2[3]>57 || lengthS(cod2)<4)
+  while(cod2[0]<48 || cod2[0]>57 ||cod2[1]<48 || cod2[1]>57 || cod2[2]<48 || cod2[2]>57 || cod2[3]<48 || cod2[3]>57 || strlen(cod2)<4)
   {
     printf("Selecione caracteres validos (0 >= x <=9):");
     scanf("%4s", cod2);
