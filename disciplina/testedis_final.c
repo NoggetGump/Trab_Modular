@@ -94,6 +94,7 @@
 ***********************************************************************/
 
 Disciplina *dis=NULL;
+
    TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
    {
 
@@ -104,18 +105,17 @@ Disciplina *dis=NULL;
 
 
       //char ValorEsperado;
-      char ValorDado1[20];
-      char ValorDado2[20];
-      int ValorDado3;
-      char ValorDado4[20];
-      char ValorDado5[20];
+      char ValorDado1Nome[25];
+      char ValorDado2Codigo[8];
+      int ValorDado3Creditos;
+      char ValorDado4Bib[300];
+      char ValorDado5Ementa[300];
 
       int  NumLidos = -1 ;
-      char *ValorRecebido1=NULL;
-	    char *ValorRecebido2=NULL;
-	    char *ValorRecebido3=NULL;
-	    char *ValorRecebido4=NULL;
-      int ValorDado33;
+      char *ValorObtido1;
+	  char *ValorEsperado1;
+      int ValorEsperado33;
+	  int ValorObtido33;
 
 
       TST_tpCondRet Ret ;
@@ -125,13 +125,13 @@ Disciplina *dis=NULL;
          if ( strcmp( ComandoTeste , GERA_PAR_DIS_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ssissi" , ValorDado1, ValorDado2, &ValorDado3 , ValorDado4, ValorDado5 , &CondRetEsperada ) ;
+            NumLidos = LER_LerParametros( "ssissi" , ValorDado1Nome, ValorDado2Codigo, &ValorDado3Creditos , ValorDado4Bib, ValorDado5Ementa , &CondRetEsperada ) ;
             if ( NumLidos != 6 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_gera_param( &dis, ValorDado1, ValorDado2, ValorDado3, ValorDado4, ValorDado5 ) ;
+            CondRetObtido = DIS_gera_param( &dis, ValorDado1Nome, ValorDado2Codigo, ValorDado3Creditos, ValorDado4Bib, ValorDado5Ementa ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
                                     "Retorno errado ao gerar disciplina recebendo parametros externos.\n" );
@@ -162,17 +162,17 @@ Disciplina *dis=NULL;
          else if ( strcmp( ComandoTeste , OBTER_CRE_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "ii" , &ValorDado33 ,
+            NumLidos = LER_LerParametros( "ii" , &ValorEsperado33 ,
                                &CondRetEsperada ) ;
             if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_creditos( dis, &ValorDado33 ) ;
-
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao obter creditos.\n" );
+            CondRetObtido = DIS_get_creditos( dis, &ValorObtido33 ) ;
+			
+			return TST_CompararInt ( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao tentar obter creditos.\n" );
 
          } /* fim ativa: Testar DIS obter creditos */
 
@@ -181,17 +181,17 @@ Disciplina *dis=NULL;
          else if ( strcmp( ComandoTeste , OBTER_EM_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "si" ,  ValorRecebido1 ,
+            NumLidos = LER_LerParametros( "si" ,  &ValorEsperado1 ,
                                &CondRetEsperada ) ;
             if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_ementa(dis, &ValorRecebido1 ) ;
+            CondRetObtido = DIS_get_ementa(dis, &ValorObtido1);
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao ir para direita." );
+                                    "Retorno errado ao tentar obter ementa." );
 
          } /* fim ativa: Testar DIS obter ementa */
 
@@ -200,17 +200,17 @@ Disciplina *dis=NULL;
          else if ( strcmp( ComandoTeste , OBTER_NOME_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "si", ValorRecebido2 ,
+            NumLidos = LER_LerParametros( "si", &ValorEsperado1 ,
                                &CondRetEsperada ) ;
             if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_nome( dis, &ValorRecebido2  ) ;
+            CondRetObtido = DIS_get_nome( dis, &ValorObtido1  ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao obter nome.\n" );
+                                    "Retorno errado ao tentar obter nome.\n" );
 
          } /* fim ativa: Testar DIS obter nome */
 	/* Testar DIS obter codigo */
@@ -218,17 +218,17 @@ Disciplina *dis=NULL;
          else if ( strcmp( ComandoTeste , OBTER_COD_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "si", ValorRecebido3 ,
+            NumLidos = LER_LerParametros( "si", &ValorEsperado1 ,
                                &CondRetEsperada ) ;
             if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_codigo( dis , &ValorRecebido3 ) ;
+            CondRetObtido = DIS_get_codigo( dis , &ValorObtido1 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao obter codigo.\n" );
+                                    "Retorno errado ao tentar obter codigo.\n" );
 
          } /* fim ativa: Testar DIS obter codigo */
 	/* Testar DIS obter bibliografia */
@@ -236,17 +236,17 @@ Disciplina *dis=NULL;
          else if ( strcmp( ComandoTeste , OBTER_BIB_CMD ) == 0 )
          {
 
-            NumLidos = LER_LerParametros( "si" , ValorRecebido4 ,
+            NumLidos = LER_LerParametros( "si" , &ValorEsperado1 ,
                                &CondRetEsperada ) ;
             if ( NumLidos != 2 )
             {
                return TST_CondRetParm ;
             } /* if */
 
-            CondRetObtido = DIS_get_bibliografia( dis , &ValorRecebido4 ) ;
+            CondRetObtido = DIS_get_bibliografia( dis , &ValorObtido1 ) ;
 
             return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao obter bibliografia.\n" );
+                                    "Retorno errado ao tentar obter bibliografia.\n" );
 
          } /* fim ativa: Testar DIS obter bibliografia */
       /* Testar DIS Destruir disciplina */
