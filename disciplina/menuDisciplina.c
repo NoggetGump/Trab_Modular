@@ -19,6 +19,7 @@
 *     Versão  Autor    Data      Observações
 *		0.01  ngtgmp   01/10/2017 Inicio do desenvolvimento
 *		0.02  ngtgmp   02/10/2017 Funções implementadas e rodando sem defeitos aparentes
+*		0.03  ngtgmp   05/10/2017 Mudança de main para função do principal
 ***************************************************************************/
 #include <string.h>
 #include <stdio.h>
@@ -26,25 +27,14 @@
 #include "disciplina.h"
 
 typedef enum {
-
-		 AcaoErro,
-			   /*Acao Erro*/
-
-         CriaDis,
-               /* Cria disciplina */
-
-         DestroiDis,
-               /* Destroi disciplina */
-			   
-		 ExibeDis,
-			   /*Exibe a disciplina*/
-			   
-         AcaoTerminar = 99
-               /* Terminar programa */
-
+	AcaoErro,         /*Acao Erro*/
+        CriaDis,           /* Cria disciplina */
+	DestroiDis,        /* Destroi disciplina */
+	ExibeDis,          /*Exibe a disciplina*/
+	AcaoTerminar = 99  /* Terminar programa */
    } IDIS_Acao ;
    
-int main (void)
+void MEN_menuDisciplina (void)
 {
 	Disciplina* d;
 	int acao = AcaoErro;
@@ -98,5 +88,4 @@ int main (void)
 			}
 		}
 	}
-	return 0;
 }
