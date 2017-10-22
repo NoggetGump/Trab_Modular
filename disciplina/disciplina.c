@@ -28,6 +28,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "disciplina.h"
+#include "listas.h"
 #define MAX_NOME 25
 #define MAX_CODIGO 8
 #define MAX_BIBLIOGRAFIA 300
@@ -48,6 +49,7 @@ struct disciplina{
   int creditos;
   char bibliografia[MAX_BIBLIOGRAFIA];
   char ementa[MAX_EMENTA];
+  Lis* lis_turmas;
 };
 
 /***** Protótipos das funções encapuladas no módulo *****/
@@ -252,6 +254,7 @@ DIS_tpCondRet DIS_gera_cmd(Disciplina** d)
   strcpy((*d)->nome, DIS_le_nome());
   strcpy((*d)->codigo, DIS_le_codigo());
   strcpy((*d)->ementa, DIS_le_ementa());
+  (*d)->lis_turmas = NULL;
 
   return DIS_CondRetDisciplinaCriada;
 }/* Fim função: DIS gera uma disciplina por input do teclado */
@@ -260,7 +263,7 @@ DIS_tpCondRet DIS_gera_cmd(Disciplina** d)
 *
 *  Função: DIS gera uma disciplina recebendo parâmetros externos
 *  ****/
-DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int creditos, char* bibliografia, char* ementa)
+DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int creditos, char* bibliografia, char* ementa, Lis* l_turmas)
 {
   (*d) = (Disciplina*) calloc(1,sizeof(Disciplina));
   if((*d) == NULL)
@@ -278,6 +281,7 @@ DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int credi
   if(sizeof(ementa)>MAX_EMENTA*sizeof(char))
 	  return DIS_CondRetParametroInvalido;
   strcpy((*d)->ementa, ementa);
+  (*d)->lis_turmas = l_turmas;
 
   return DIS_CondRetDisciplinaCriada;
 }/* Fim função: DIS gera uma disciplina recebendo parâmetros externos */
