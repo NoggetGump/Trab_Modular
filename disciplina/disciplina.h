@@ -114,7 +114,7 @@ DIS_tpCondRet DIS_gera_cmd(Disciplina** d);
 *    DIS gera uma disciplina recebendo parâmetros externos
 *
 ***********************************************************************/
-DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int creditos, char* bibliografia, char* ementa);
+DIS_tpCondRet DIS_gera_param(Disciplina** d, char* nome, char* codigo, int creditos, char* bibliografia, char* ementa, , Lis* l_turmas);
 /***********************************************************************
 *
 *  $FC Função: DIS exibe disciplina
